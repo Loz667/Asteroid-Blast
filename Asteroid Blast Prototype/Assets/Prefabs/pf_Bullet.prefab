@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1818106327604666071}
   m_Layer: 0
   m_Name: pf_Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0.1, z: 0}
+  impactFX: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
 --- !u!114 &-1818106327604666071
 MonoBehaviour:
   m_ObjectHideFlags: 0

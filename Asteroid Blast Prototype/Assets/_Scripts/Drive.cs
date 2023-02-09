@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Drive : MonoBehaviour
 {
     [SerializeField] float speed = 10.0f;
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Slider healthBar;
+    [SerializeField] GameObject impactFX;
+    [SerializeField] GameObject explodeFX;
 
     void Update()
     {
@@ -13,7 +16,31 @@ public class Drive : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+            GameObject bullet = Pool.instance.GetObject("Bullet");
+            if (bullet != null)
+            {
+                bullet.transform.position = this.transform.position;
+                bullet.SetActive(true);
+            }
+        }
+
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3 (0, -140, 0);
+        healthBar.transform.position = screenPos;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Asteroid"))
+        {
+            Instantiate(impactFX, other.transform.position, Quaternion.identity);
+            other.gameObject.SetActive(false);
+            healthBar.value -= 10;
+            if (healthBar.value <= 0)
+            {
+                Instantiate(explodeFX, this.transform.position, Quaternion.identity);
+                Destroy(healthBar.gameObject, 0.1f);
+                Destroy(this.gameObject, 0.1f);
+            }
         }
     }
 }
