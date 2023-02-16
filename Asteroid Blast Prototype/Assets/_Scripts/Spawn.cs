@@ -4,7 +4,12 @@ public class Spawn : MonoBehaviour
 {
     void Update()
     {
-        if (Random.Range(0, 500) < 5)
+        SpawnObject();
+    }
+
+    public void SpawnObject()
+    {
+        if (Random.Range(0, 250) < 5)
         {
             GameObject asteroid = Pool.instance.GetObject("Asteroid");
             if (asteroid != null)
