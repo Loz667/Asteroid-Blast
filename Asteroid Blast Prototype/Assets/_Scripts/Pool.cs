@@ -40,7 +40,7 @@ public class Pool : MonoBehaviour
     {
         for (int i = 0; i < poolObjects.Count; i++)
         {
-            if (!poolObjects[i].activeInHierarchy && poolObjects[i].tag == tag)
+            if (!poolObjects[i].activeInHierarchy && poolObjects[i].CompareTag(tag))
             {
                 return poolObjects[i];
             }
@@ -48,7 +48,7 @@ public class Pool : MonoBehaviour
 
         foreach(PoolItem item in poolItems)
         {
-            if (item.prefab.tag == tag && item.expandable)
+            if (item.prefab.CompareTag(tag) && item.expandable)
             {
                 GameObject obj = Instantiate(item.prefab);
                 obj.SetActive(false);

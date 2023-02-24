@@ -1,6 +1,5 @@
 using LootLocker.Requests;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +13,7 @@ public class GameManager : MonoBehaviour
     {
         get 
         {
-            if (instance is null)
+            if (instance == null)
                 Debug.LogError("Game Manager is NULL");
             return instance; 
         }
@@ -25,8 +24,6 @@ public class GameManager : MonoBehaviour
     }
 
     public bool GameOver = false;
-
-    private UnityEvent playerConnected;
 
     private IEnumerator Start()
     {
@@ -43,7 +40,6 @@ public class GameManager : MonoBehaviour
             connected = true;
         });
         yield return new WaitUntil(() => connected);
-        playerConnected.Invoke();
     }
 
     [SerializeField] GameObject gameOverCanvas;
