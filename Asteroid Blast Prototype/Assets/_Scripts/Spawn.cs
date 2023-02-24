@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
+    private Drive driveScript;
+
+    private void Start()
+    {
+        driveScript = GameObject.Find("Ship").GetComponent<Drive>();
+    }
     void Update()
     {
-        SpawnObject();
+        if (!GameManager.Instance.GameOver)
+        {
+            SpawnObject();
+        }
     }
 
-    public void SpawnObject()
+    void SpawnObject()
     {
-        if (Random.Range(0, 250) < 5)
+        if (Random.Range(0, 150) < 10)
         {
             GameObject asteroid = Pool.instance.GetObject("Asteroid");
             if (asteroid != null)
